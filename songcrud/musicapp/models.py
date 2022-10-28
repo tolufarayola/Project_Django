@@ -1,21 +1,29 @@
+from email.policy import default
 from turtle import title
-# from unittest.util import _MAX_LENGTH
-# from django.db import models
+from datetime import datetime
+from django.db import models
 
-# # Create your models here.
-# class Artiste(models.Model):
-#     first_name = models.CharField(max_length = 400)
-#     last_name = models.CharField(max_length = 400)
-#     age = models.BigIntegerField()
+# Create your models here.
+class Artiste(models.Model):
+    first_name = models.CharField(max_length = 30)
+    last_name = models.CharField(max_length = 30)
+    age = models.IntegerField()
 
-# class Song(models.Models):
-#     Artiste = models.ForeignKey(Artiste, on_delete=models.CASCADE)
-#     title = models.CharField(max_length = 400)
-#     date_released = models.DateField()
-#     likes = models.IntegerField()
-#     artiste_id = models.BigAutoField()
+    def __str__(self):
+        return self.first_name
+class Song(models.Model):
+    Artiste = models.ForeignKey(Artiste, on_delete = models.CASCADE)
+    title = models.CharField(max_length = 400)
+    date_released = models.DateField()
+    likes = models.IntegerField()
+    artisteid = models.IntegerField()
 
-# class Lyric(models.Models):
-#     Song = models.ForeignKey(Song, on_delete=models.CASCADE)
-#     context = models.CharField(max_length = 4000)
-#     song_id = models.IntegerField()
+    def __str__(self):
+        return self.title
+class Lyric(models.Model):
+    Song = models.ForeignKey(Song, on_delete = models.CASCADE)
+    context = models.CharField(max_length = 4000)
+    songid = models.IntegerField()
+
+    def __str__(self):
+        return self.context
